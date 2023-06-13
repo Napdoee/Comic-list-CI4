@@ -4,3 +4,5 @@
 <script src="<?= base_url('template/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('template/dist/js/adminlte.min.js') ?>"></script>
+<!-- Script.js -->
+<script src="<?= base_url('js/script.js') ?>"></script>

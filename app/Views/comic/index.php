@@ -3,18 +3,7 @@
 <!-- Content Header (Page header) -->
 <div class="content-header">
     <div class="container">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0"> Top Navigation <small>Example 3.0</small></h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                    <li class="breadcrumb-item active">Top Navigation</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+        <h1 class="m-0"> Comic List <small>v 1.0</small></h1>
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content-header -->
@@ -23,63 +12,23 @@
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's
-                            content.
-                        </p>
-
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div>
-
-                <div class="card card-primary card-outline">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-
-                        <p class="card-text">
-                            Some quick example text to build on the card title and make up the bulk of the card's
-                            content.
-                        </p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
-                </div><!-- /.card -->
-            </div>
-            <!-- /.col-md-6 -->
-            <div class="col-lg-6">
-                <div class="card">
+            <?php $no = 1;
+            foreach ($comics as $comic) : ?>
+            <div class="col-md-3">
+                <div class="card card-outline card-primary text-center">
                     <div class="card-header">
-                        <h5 class="card-title m-0">Featured</h5>
+                        <h3 class="card-title"><?= $comic['title'] ?></h3>
                     </div>
-                    <div class="card-body">
-                        <h6 class="card-title">Special title treatment</h6>
-
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-
-                <div class="card card-primary card-outline">
-                    <div class="card-header">
-                        <h5 class="card-title m-0">Featured</h5>
-                    </div>
-                    <div class="card-body">
-                        <h6 class="card-title">Special title treatment</h6>
-
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <div class="card-body p-2">
+                        <img src="<?= base_url("img/$comic[cover]") ?>" class="rounded img-thumbnail"
+                            style="width: 100%; height: 300px;">
+                        <a href="<?= base_url("comic/$comic[slug]") ?>" class="btn btn-primary w-100 mt-2">More
+                            Detail</a>
                     </div>
                 </div>
             </div>
-            <!-- /.col-md-6 -->
+            <?php endforeach; ?>
         </div>
-        <!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->

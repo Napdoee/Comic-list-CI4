@@ -31,20 +31,27 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 
 $routes->get('/', 'Auth::login');
-$routes->get('/comic', 'Guest::index');
+
+$routes->group('/comic', function ($routes) {
+    $routes->get('/', 'Guest::index');
+    $routes->get('(:any)', 'Guest::detail/$1');
+});
 
 $routes->group('admin', function ($routes) {
     //Admin
     $routes->get('/', 'Admin::index');
     $routes->get('comic', 'Admin::comic');
     $routes->get('user', 'Admin::user');
+    $routes->get('comic/(:any)', 'Admin::update/$1');
     $routes->get('user/(:any)', 'Admin::update/$1');
+    $routes->delete('comic/(:any)', 'Admin::delete/$1');
     $routes->delete('user/(:num)', 'Admin::delete/$1');
     //User
     $routes->post('user/update', 'User::UpdateUser');
     $routes->post('user/new', 'User::CreateUser');
     //Comic
     $routes->post('comic/new', 'Comic::CreateComic');
+    $routes->post('comic/update', 'Comic::UpdateComic');
 });
 
 $routes->group('auth', function ($routes) {

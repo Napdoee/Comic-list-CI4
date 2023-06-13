@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
+                        <th class="text-center" style="width: 17%">Cover</th>
                         <th>Title</th>
                         <th>Author</th>
                         <th>Release Date</th>
@@ -34,25 +35,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $no = 1;
+                    foreach ($comics as $comic) : ?>
                     <tr>
-                        <td>1</td>
-                        <td>Harry Potter</td>
-                        <td>J.K Rowling</td>
-                        <td>12/05/2023</td>
-                        <td>
-                            <a href="<?= base_url("admin/comic/") ?>" class="btn btn-warning">Update</a>
-                            <form action="<?= base_url("admin/comic/") ?>" method="post" class="d-inline">
+                        <td class="align-middle"><?= $no++ ?></td>
+                        <td class="text-center">
+                            <img src="<?= base_url("img/$comic[cover]") ?>" class="rounded" width="100px">
+                        </td>
+                        <td class="align-middle"><?= $comic['title'] ?></td>
+                        <td class="align-middle"><?= $comic['author'] ?></td>
+                        <td class="align-middle"><?= $comic['release_date'] ?></td>
+                        <td class="align-middle">
+                            <a href="<?= base_url("admin/comic/$comic[slug]") ?>" class="btn
+                                btn-warning">Update</a>
+                            <form action="<?= base_url("admin/comic/$comic[id]") ?>" method="post" class="d-inline">
                                 <?= csrf_field(); ?>
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit" class="btn btn-danger"
-                                    onclick="return confirm('Are you sure want delete ? ')">Delete</button>
+                                    onclick="return confirm('Are you sure want delete <?= $comic['title'] ?> comic? ')">Delete</button>
                             </form>
                         </td>
                     </tr>
+                    <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
-        <!-- /.card-body -->
     </div>
 </div>
 
@@ -65,7 +72,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('admin/comic/new') ?>" method="post">
+            <form action="<?= base_url('admin/comic/new') ?>" method="post" enctype="multipart/form-data">
                 <?= csrf_field(); ?>
                 <div class="modal-body">
                     <div class="form-group">
@@ -85,10 +92,21 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputFile">Cover</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="exampleInputFile" name="cover">
-                                <label class="custom-file-label" for="exampleInputFile"></label>
+                        <div class="row">
+                            <div class="col-3">
+                                <img id="imgPreview" class="rounded" width="100px"
+                                    src="<?= base_url('img/default.png') ?>">
+                            </div>
+                            <div class="col-9">
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="cover" name="cover"
+                                            oninput="previewImg()">
+                                        <label class="custom-file-label" for="cover">
+                                            Chosee Cover
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
